@@ -4,18 +4,16 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 
 public class MainMenu extends Activity {
 
-    private RelativeLayout relativeLayout;
     private Button newGameButton, continueButton, optionsButton, quitGameButton;
     private ImageButton titleBackground;
+    public static int LEVEL = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +26,7 @@ public class MainMenu extends Activity {
 
         newGameButton = (Button) findViewById(R.id.newgamebutton);
         newGameButton.setBackgroundResource(R.drawable.buttonactivebackground);
-        newGameButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainMenu.this, Level1.class));
-            }
-        });
+        onNewGameClick();
 
         continueButton = (Button) findViewById(R.id.continuebutton);
         continueButton.setBackgroundResource(R.drawable.buttoninactivebackground);
@@ -43,6 +36,19 @@ public class MainMenu extends Activity {
 
         quitGameButton = (Button) findViewById(R.id.quitgamebutton);
         quitGameButton.setBackgroundResource(R.drawable.buttonactivebackground);
+        onQuitGameClick();
+
+    }
+    public void onNewGameClick(){
+        newGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainMenu.this, Board.class));
+                LEVEL++;
+            }
+        });
+    }
+    public void onQuitGameClick(){
         quitGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,6 +65,5 @@ public class MainMenu extends Activity {
                         .show();
             }
         });
-
     }
 }
